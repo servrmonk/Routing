@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="commonStyles.css">
+    <style>
+        .bg-red{
+            background-color: red;
+        }
+    </style>
+    <title>Admited</title>
+</head>
+
+<body>
+    <div id="links">
+        <div><a href="index.html">Home</a></div>
+        <div><a href="applied.html">Applied Jobs</a></div>
+        <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Job Applied</th>
+            </tr>
+        </thead>
+        <tbody id="body">
+        </tbody>
+    </table>
+</body>
+
+</html>
+
+<script>
+    let bookMarkDataFromLS = JSON.parse(localStorage.getItem("bookMarkData"));
+    
+    // displayTable(bookMarkDataFromLS)
+/*
+    function displayTable(elem){
+        arrFromLS.forEach(function (elem) {
+            // console.log(elem); elem is seperate object
+            //4 row and 1 col check screenshot
+            let tr = document.createElement('tr');
+
+            let td1 = document.createElement('td');
+            td1.innerText = elem.personName;
+
+            let td2 = document.createElement('td');
+            td2.innerText = elem.personEmail;
+
+            let td3 = document.createElement('td');
+            td3.innerText = elem.personRole;
+
+            let td4 = document.createElement('td');
+            td4.innerText = elem.personSalary;
+
+            let td5 = document.createElement('td');
+            td5.innerText = "Bookmark" //just a string
+            td5.addEventListener('click', function () {
+                // console.log(elem);
+                bookmarkFun(elem)
+            });
+
+            tr.append(td1, td2, td3, td4, td5);
+            document.querySelector('tbody').append(tr);
+
+        })
+    }
+*/
+
+    // there are one more method to creating table but there is disadvantage for that also
+    // shortcut it has some limitations
+    // for deleting use splice 
+    // check dummy.html
+    // document.querySelector('tbody').innerHTML = "  <tr><td></td><td></td><td></td></tr>"write this in for loop
+    bookMarkDataFromLS.forEach(function(elem){
+    document.querySelector('tbody').innerHTML = `<tr><td class="bg-red" >${elem.personName}</td><td>${elem.personEmail}</td><td>${elem.personRole}</td></tr>`;
+    })
+    // so what is the limitation: u can't write onclick
+    // use this shortcut where there is no onclick involved
+
+   
+</script>

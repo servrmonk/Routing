@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+    <div id="links">
+        <!-- routing:go to different pages -->
+        <div><a href="index.html">Home</a></div>
+        <div><a href="applied.html">Applied Jobs</a></div>
+        <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+    <form action="" id="form">
+        <h2>Enter Your Application Details</h2>
+        <input type="text" placeholder="Enter Name" id="name" name="name">
+        <input type="email" placeholder="Enter email" name="email" id="email">
+        <select name="role" id="role">
+            <option value="FSD">FSD</option>
+            <option value="Backend">Backend</option>
+            <option value="Frontend">Frontend</option>
+        </select>
+        <input id="salary" type="number" placeholder="Enter expected salary in lakhs per annum" />
+        <input type="submit" name="submit" id="submit" value="Submit">
+    </form>
+
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', myJobApp);
+    // let lobArr = [];
+    let jobArr = JSON.parse(localStorage.getItem("jobData"))||[]; //job data is array of object and we are fetching from local storage so wee need to parse it , ur array is getting updated with local storage value
+    function myJobApp() {
+        event.preventDefault();
+        // store in array of object 
+        let jobObj = {
+            //object bn gya lekin isme value nai jaega isme value overwrite hoga try kr lo so use array of object
+            personName: document.querySelector('#name').value,
+            personEmail: document.querySelector('#email').value,
+            personRole: document.querySelector('#role').value,
+            personSalary: document.querySelector('#salary').value,
+        };
+        // console.log(jobObj);
+        jobArr.push(jobObj); //now u'll get array of object 
+        // console.log(jobArr);
+        // we need to store this in different pages, u need to do first store all the array in local storage , u need to push all the entire array in local storage
+        // localStorage.setItem('jobData',JSON.stringify(jobArr))
+        // so now i need to access the jobarray in a new pages than only i can form these table so i need to display table in applied.html pages we need to first store the job array first
+        localStorage.setItem("jobData", JSON.stringify(jobArr));
+        // INSTEAD OF MT ARRAY IN LINE NO 33 WE CAN PUT LOCAL STORAGE DATA SO AFTER REFRESHING PAGE DATA IS ON THE SCREEN AS LIKE COUNTER EXAMPLE
+
+    }
+</script>
+
+</html>

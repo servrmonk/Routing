@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyles.css">
+    <style>
+        tbody>tr>td:last-child {
+            background-color: red;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="links">
+        <div><a href="index.html">Home</a></div>
+        <div><a href="applied.html">Applied Jobs</a></div>
+        <div><a href="bookmark.html">Bookmark</a></div>
+    </div>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Job applied</th>
+                    <th>Salary expected</th>
+                    <th>Add to Bookmark</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+                <!-- Append your output to tbody -->
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>
+<script>
+    let arrFromLS = JSON.parse(localStorage.getItem('jobData'));
+    // console.log(arrFromLS);
+    // let bookMarkArr = [];
+    let bookMarkArr  = JSON.parse(localStorage.getItem("bookMarkData"))||[];
+    displayTable(arrFromLS);
+
+    function displayTable(arrFromLS) {
+        // console.log(arrFromLS);
+        arrFromLS.forEach(function (elem) {
+            // console.log(elem); elem is seperate object
+            //4 row and 1 col check screenshot
+            let tr = document.createElement('tr');
+
+            let td1 = document.createElement('td');
+            td1.innerText = elem.personName;
+
+            let td2 = document.createElement('td');
+            td2.innerText = elem.personEmail;
+
+            let td3 = document.createElement('td');
+            td3.innerText = elem.personRole;
+
+            let td4 = document.createElement('td');
+            td4.innerText = elem.personSalary;
+
+            let td5 = document.createElement('td');
+            td5.innerText = "Bookmark" //just a string
+            td5.addEventListener('click', function () { 
+                // console.log(elem);
+                bookmarkFun(elem)
+             });
+
+            tr.append(td1, td2, td3, td4, td5);
+            document.querySelector('tbody').append(tr);
+
+        })
+    }
+
+    // so whenever u click on bookmarkso u need to display name email and job applied , when u click on bookmark u need to print entire row, ex when u bookmark any tshirt on myntra or any other ecommerce u ned entire item or object here
+    // whenever u click on td5 u should get entire element
+    function bookmarkFun(elem) {
+        // console.log(event.target.parentNode);//not work another method is pass elem in td5 function X jst use anynomous function 
+        // console.log(elem);
+        bookMarkArr.push(elem);
+        console.log(bookMarkArr);
+        // store bookmark array in local storeage
+        localStorage.setItem("bookMarkData",JSON.stringify(bookMarkArr)); //again same story if u refresh again it will vanish all so u have to reassign all in bookmarkFun so pass json.parse(localstorage.getitem )
+    }
+// we have to store all the click of bookmar in bookmark array
+
+    
+</script>
+
+
+<!-- now get the bookmark storage in bookmark array -->
